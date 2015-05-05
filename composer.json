@@ -1,8 +1,8 @@
 {
-    "name": "",
-    "description": "",
+    "name": "drupal-composer/drupal-project",
+    "description": "Project template for Drupal 8 projects with composer",
     "type": "project",
-    "license": "",
+    "license": "MIT",
     "authors": [
         {
             "name": "",
@@ -17,7 +17,7 @@
         },
         {
             "type": "composer",
-            "url": "http://packagist.drupal-composer.org"
+            "url": "https://packagist.drupal-composer.org"
         }
     ],
     "require": {
