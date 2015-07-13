@@ -13,10 +13,6 @@
     "repositories": [
         {
             "type": "composer",
-            "url": "https://raw.githubusercontent.com/webflo/d8/master/packages.json"
-        },
-        {
-            "type": "composer",
             "url": "https://packagist.drupal-composer.org"
         }
     ],
@@ -39,7 +35,7 @@
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
-            "web/drush/commands/{$name}": ["type:drupal-drush"]
+            "drush/commands/{$name}": ["type:drupal-drush"]
         }
     }
 }
