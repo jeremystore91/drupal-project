@@ -1,8 +1,12 @@
 language: php
 php:
-  - 5.4
   - 5.5
   - 5.6
+
+sudo: false
+
+env:
+  - SIMPLETEST_DB=sqlite://tmp/site.sqlite
 
 before_install:
   - phpenv config-rm xdebug.ini
@@ -13,7 +17,21 @@ install:
   - composer --verbose install
 
 script:
-  - cd web
+  # Test stable release
+  - cd $TRAVIS_BUILD_DIR/web
   - ./../vendor/bin/drush site-install --verbose --yes --db-url=sqlite://tmp/site.sqlite
   # Skip core/tests/Drupal/Tests/ComposerIntegrationTest.php because web/ has no composer.json
   - ./../vendor/bin/phpunit -c core --exclude-group Composer
+  - ./../vendor/bin/drush
+  - ./../vendor/bin/console
+
+  # Test dev release
+  - cd $TRAVIS_BUILD_DIR
+  - composer --verbose require --no-update drupal/core:8.0.x-dev
+  - composer --verbose update
+  - cd $TRAVIS_BUILD_DIR/web
+  - ./../vendor/bin/drush site-install --verbose --yes --db-url=sqlite://tmp/site.sqlite
+  # Skip core/tests/Drupal/Tests/ComposerIntegrationTest.php because web/ has no composer.json
+  - ./../vendor/bin/phpunit -c core --exclude-group Composer
+  - ./../vendor/bin/drush
+  - ./../vendor/bin/console
