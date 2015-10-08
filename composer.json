@@ -2,14 +2,13 @@
     "name": "drupal-composer/drupal-project",
     "description": "Project template for Drupal 8 projects with composer",
     "type": "project",
-    "license": "MIT",
+    "license": "GPL-2.0+",
     "authors": [
         {
             "name": "",
             "role": ""
         }
     ],
-    "support": {},
     "repositories": [
         {
             "type": "composer",
@@ -19,10 +18,15 @@
     "require": {
         "composer/installers": "^1.0.20",
         "drupal/core": "8.0.*",
-        "drush/drush": "8.*",
-
-        "drupal/devel": "8.1.*@dev",
-        "drupal/token": "8.1.*@dev"
+        "drush/drush": "dev-master",
+        "drupal/console": "dev-master"
+    },
+    "require-dev": {
+        "behat/mink": "~1.6",
+        "behat/mink-goutte-driver": "~1.2",
+        "mikey179/vfsStream": "~1.2",
+        "phpunit/phpunit": "~4.8",
+        "symfony/css-selector": "2.7.*"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
