@@ -6,8 +6,6 @@ env:
   COMPOSER_MEMORY_LIMIT: -1
   SIMPLETEST_DB: sqlite://tmp/site.sqlite
   SIMPLETEST_BASE_URL: "http://127.0.0.1:8080"
-  COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
-  WODBY_ENVIRONMENT_TYPE: CI
 
 jobs:
   build:
@@ -43,7 +41,7 @@ jobs:
       - name: Update composer
         run: composer --verbose self-update --${{ matrix.composer-channel }}
 
-      - name: Dump composer verson
+      - name: Dump composer version
         run: composer --version
 
       - name: Validate composer.json
@@ -53,10 +51,10 @@ jobs:
         run: composer --verbose install
 
       - if: matrix.drupal-release == 'dev'
-        run: |
-          composer --verbose require --no-update drupal/core-recommended:9.2.x-dev
-          composer --verbose require --no-update --dev drupal/core-dev:9.2.x-dev
-          composer --verbose update
+        run: composer --verbose require --no-update drupal/core-recommended:9.2.x-dev && composer --verbose require --no-update --dev drupal/core-dev:9.2.x-dev
+
+      - if: matrix.drupal-release == 'dev'
+        run: composer --verbose update
 
       - run: ./vendor/bin/drush site-install --verbose --yes --db-url=sqlite://tmp/site.sqlite
 
